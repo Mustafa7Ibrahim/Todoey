@@ -12,7 +12,7 @@ class TodoListViewController: UITableViewController {
     
     var items = [Item]()
     
-    let defults = UserDefaults.standard
+    let defaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class TodoListViewController: UITableViewController {
         item2.title = "Buy Eggs"
         items.append(item2)
         
-        if let itemsArray = defults.value(forKey: "items") as? [Item] {
+        if let itemsArray = defaults.value(forKey: "items") as? [Item] {
             items = itemsArray
         }
 
