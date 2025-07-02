@@ -17,6 +17,8 @@ class TodoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
+        
         var item1 = Item()
         item1.title = "Buy Milk"
         items.append(item1)
@@ -74,8 +76,15 @@ class TodoListViewController: UITableViewController {
                 var newItem = Item()
                 newItem.title = textField
                 items.append(newItem)
+                let encoder = PropertyListEncoder()
+                do {
+                    let data = try encoder.encode(newItem)
+                    
+                } catch {
+                    print("Add item error... \(error)")
+                }
+                defaults.set(items, forKey: "items")
                 tableView.reloadData()
-//                UserDefaults.standard.set(items, forKey: "items")
             }
         }
         alert.addTextField { alertTextField in
